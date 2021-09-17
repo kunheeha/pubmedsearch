@@ -1,0 +1,33 @@
+{% extends 'search/base.html' %}
+{% block head %}
+{% endblock %}
+
+{% block navbar %}{% endblock %}
+{% block rightnav %}{% endblock %}
+
+{% block content %}
+  <h1>{{ article.title }}</h1>
+  <hr>
+  <div class="row">
+	<div class="col-md-8">
+      <h3 class="text-center">Abstract</h3>
+      <hr>
+      <p>{{ article.abstract }}</p>
+    </div>
+	<div class="col-md-4">
+      <h3 class="text-center">Full-Text Link(s)</h3>
+      <hr>
+      {% for link in links %}
+        <a class="list-group-item list-group-item-action" href="{{ link.link }}" target="_blank">
+          {% if link.free %}
+            Free full text
+          {% else %}
+            Full text
+          {% endif %}
+        </a>
+        
+      {% endfor %}
+    </div>
+  </div>
+  <hr>
+{% endblock %}

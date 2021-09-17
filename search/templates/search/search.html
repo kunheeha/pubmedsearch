@@ -1,0 +1,21 @@
+{% extends 'search/base.html' %}
+{% block head %}
+{% endblock %}
+
+{% block navbar %}{% endblock %}
+{% block rightnav %}{% endblock %}
+
+{% block content %}
+
+  <h1>Search</h1>
+  <hr>
+  <form method="POST">
+	{% csrf_token %}
+    <div class="input-group mb-3">
+      <input type="search" class="form-control" placeholder="Search in PubMed" name="keywords" aria-label="Search">
+      <div class="input-group-append">
+        <button class="btn btn-outline-dark" type="submit">New Search</button>
+      </div>
+    </div>
+  </form>
+{% endblock %}
