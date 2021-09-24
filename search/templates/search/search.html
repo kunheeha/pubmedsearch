@@ -1,4 +1,5 @@
 {% extends 'search/base.html' %}
+{% load static %}
 {% block head %}
 {% endblock %}
 
@@ -6,16 +7,34 @@
 {% block rightnav %}{% endblock %}
 
 {% block content %}
-
   <h1>Search</h1>
   <hr>
-  <form method="POST">
+  <form class="mb-5" method="POST">
 	{% csrf_token %}
     <div class="input-group mb-3">
       <input type="search" class="form-control" placeholder="Search in PubMed" name="keywords" aria-label="Search">
       <div class="input-group-append">
-        <button class="btn btn-outline-dark" type="submit">New Search</button>
+        <button id='searchbutton' class="btn btn-outline-dark" type="submit">New Search</button>
       </div>
     </div>
   </form>
+  <h3>Recent Searches</h3>
+  <hr>
+  <div class="row row-cols-1 row-cols-md-3">
+    {% for search in searches %}
+      <div class="col mb-4">
+        <div class="card">
+          <a class="workspace-link" href="{% url 'user-search' search.id %}">
+            <div class="card-body">
+              <h5 class="card-title">{{ search.search }}</h5>
+              <p class="text-muted"><small>Searched on: {{ search.date_searched }}</small></p>
+            </div>
+          </a>
+          <div class="card-footer text-right">
+            <a href="{% url 'delete-user-search' search.id %}">Delete</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
 {% endblock %}

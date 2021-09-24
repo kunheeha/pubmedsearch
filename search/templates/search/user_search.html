@@ -1,0 +1,25 @@
+{% extends 'search/base.html' %}
+{% block head %}
+{% endblock %}
+
+{% block navbar %}{% endblock %}
+{% block rightnav %}{% endblock %}
+
+{% block content %}
+  <h1>Searched for: {{ search.search }}</h1>
+  <hr>
+  {% for article in articles %}
+    <div class="card mb-3">
+      <a class="workspace-link" href="{% url 'user-article' article.id %}">
+        <h5 class="card-header">{{ article.title }}</h5>
+        <div class="card-body">
+            <p class="card-text">{{ article.abstract }}</p>
+        </div>
+      </a>
+      <div class="card-footer text-right">
+        <a href="{% url 'delete-user-article' article.id search.id %}">Remove</a>
+      </div>
+    </div>
+  {% endfor %}
+{% endblock %}
+
